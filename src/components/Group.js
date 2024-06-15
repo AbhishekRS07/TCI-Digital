@@ -1,7 +1,7 @@
 import React from 'react';
 import { FaTrash } from 'react-icons/fa';
 import './Group.css';
-
+import { FaArrowRight } from 'react-icons/fa';
 function Group({ index, group, onDelete, onUpdate }) {
   const handleChange = (e, field) => {
     const updatedGroup = { ...group, [field]: parseInt(e.target.value) };
@@ -18,7 +18,7 @@ function Group({ index, group, onDelete, onUpdate }) {
         max={group.to - 1}
         placeholder="From"
       />
-      <span>to</span>
+       <FaArrowRight className="delete-icon"/>
       <input
         type="number"
         value={group.to}
