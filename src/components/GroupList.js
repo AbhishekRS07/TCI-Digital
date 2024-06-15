@@ -1,4 +1,5 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
+import axios from 'axios';
 import { useSelector, useDispatch } from 'react-redux';
 import { addGroup, deleteGroup, updateGroup } from '../actions/groupActions';
 import Group from './Group';
@@ -7,20 +8,26 @@ import { FaPlus, FaEye, FaEyeSlash } from 'react-icons/fa';
 import './GroupList.css';
 
 function GroupList() {
- const groups = useSelector(state => state.groups);
-  const dispatch = useDispatch();
+  const initialGroup = { from: 1, to: 10 };
+  const [groups, setGroups] = useState([initialGroup]);
   const [showStatus, setShowStatus] = useState(false);
+  const dispatch = useDispatch();
 
   const handleAddGroup = () => {
-    dispatch(addGroup());
+    const newGroup = { from: '', to: '' };
+    setGroups([...groups, newGroup]);
   };
 
   const handleDeleteGroup = (index) => {
-    dispatch(deleteGroup(index));
+    const updatedGroups = [...groups];
+    updatedGroups.splice(index, 1);
+    setGroups(updatedGroups);
   };
 
-  const handleUpdateGroup = (index, group) => {
-    dispatch(updateGroup(index, group));
+  const handleUpdateGroup = (index, updatedGroup) => {
+    const updatedGroups = [...groups];
+    updatedGroups[index] = updatedGroup;
+    setGroups(updatedGroups);
   };
 
   const handleToggleStatus = () => {
@@ -41,10 +48,14 @@ function GroupList() {
         ))}
         <div className="icon-container">
           <FaPlus onClick={handleAddGroup} className="icon" title="Add Group" />
-          {showStatus ? (
-            <FaEyeSlash onClick={handleToggleStatus} className="icon" title="Hide Status" />
-          ) : (
-            <FaEye onClick={handleToggleStatus} className="icon" title="Show Status" />
+          {groups.length > 0 && (
+            <>
+              {showStatus ? (
+                <FaEyeSlash onClick={handleToggleStatus} className="icon" title="Hide Status" />
+              ) : (
+                <FaEye onClick={handleToggleStatus} className="icon" title="Show Status" />
+              )}
+            </>
           )}
         </div>
       </div>
