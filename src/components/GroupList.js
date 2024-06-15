@@ -1,11 +1,11 @@
-import React, { useState, useEffect } from 'react';
-import axios from 'axios';
-import { useSelector, useDispatch } from 'react-redux';
-import { addGroup, deleteGroup, updateGroup } from '../actions/groupActions';
-import Group from './Group';
-import StatusDisplay from './StatusDisplay';
-import { FaPlus, FaEye, FaEyeSlash } from 'react-icons/fa';
-import './GroupList.css';
+import React, { useState } from "react";
+
+import { useDispatch } from "react-redux";
+
+import Group from "./Group";
+import StatusDisplay from "./StatusDisplay";
+import { FaPlus, FaEye, FaEyeSlash } from "react-icons/fa";
+import "./GroupList.css";
 
 function GroupList() {
   const initialGroup = { from: 1, to: 10 };
@@ -14,7 +14,7 @@ function GroupList() {
   const dispatch = useDispatch();
 
   const handleAddGroup = () => {
-    const newGroup = { from: '', to: '' };
+    const newGroup = { from: "", to: "" };
     setGroups([...groups, newGroup]);
   };
 
@@ -31,7 +31,7 @@ function GroupList() {
   };
 
   const handleToggleStatus = () => {
-    setShowStatus(prevShowStatus => !prevShowStatus);
+    setShowStatus((prevShowStatus) => !prevShowStatus);
   };
 
   return (
@@ -51,9 +51,17 @@ function GroupList() {
           {groups.length > 0 && (
             <>
               {showStatus ? (
-                <FaEyeSlash onClick={handleToggleStatus} className="icon" title="Hide Status" />
+                <FaEyeSlash
+                  onClick={handleToggleStatus}
+                  className="icon"
+                  title="Hide Status"
+                />
               ) : (
-                <FaEye onClick={handleToggleStatus} className="icon" title="Show Status" />
+                <FaEye
+                  onClick={handleToggleStatus}
+                  className="icon"
+                  title="Show Status"
+                />
               )}
             </>
           )}

@@ -28,23 +28,22 @@ function StatusDisplay({ groups }) {
     fetchStatuses();
   }, [groups]);
 
-  // Validation function to check the rules
+ 
   const validateGroups = () => {
     const sortedGroups = [...groups].sort((a, b) => a.from - b.from);
 
-    // Rule 1: Check if entire range 1-10 is covered
+  
     if (sortedGroups.length === 0 || sortedGroups[0].from !== 1 || sortedGroups[sortedGroups.length - 1].to !== 10) {
       return false;
     }
 
-    // Rule 2: Check for gaps between consecutive groups
+  
     for (let i = 1; i < sortedGroups.length; i++) {
       if (sortedGroups[i].from !== sortedGroups[i - 1].to + 1) {
         return false;
       }
     }
 
-    // Rule 3: Check for overlap between consecutive groups
     for (let i = 1; i < sortedGroups.length; i++) {
       if (sortedGroups[i].from <= sortedGroups[i - 1].to) {
         return false;
@@ -54,7 +53,7 @@ function StatusDisplay({ groups }) {
     return true;
   };
 
-  // Display statuses only if groups are valid
+  
   return (
     <div className="status-display">
       {validateGroups() ? (
