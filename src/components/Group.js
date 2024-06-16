@@ -1,15 +1,16 @@
 import React from 'react';
-import { FaTrash } from 'react-icons/fa';
+import { FaTrash, FaArrowRight } from 'react-icons/fa';
 import './Group.css';
-import { FaArrowRight } from 'react-icons/fa';
+
 function Group({ index, group, onDelete, onUpdate }) {
   const handleChange = (e, field) => {
-    const updatedGroup = { ...group, [field]: parseInt(e.target.value) };
+    const updatedGroup = { ...group, [field]: parseInt(e.target.value, 10) };
     onUpdate(updatedGroup);
   };
 
   return (
-    <div className="group">
+    <div className="group-container">
+      <div className="group-number">Group {index + 1}</div>
       <input
         type="number"
         value={group.from}
@@ -17,8 +18,9 @@ function Group({ index, group, onDelete, onUpdate }) {
         min={1}
         max={group.to - 1}
         placeholder="From"
+        className="group-input"
       />
-       <FaArrowRight className="delete-icon"/>
+      <FaArrowRight className="arrow-icon" />
       <input
         type="number"
         value={group.to}
@@ -26,6 +28,7 @@ function Group({ index, group, onDelete, onUpdate }) {
         min={group.from + 1}
         max={10}
         placeholder="To"
+        className="group-input"
       />
       <FaTrash onClick={onDelete} className="delete-icon" title="Delete Group" />
     </div>

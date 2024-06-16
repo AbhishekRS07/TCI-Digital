@@ -1,5 +1,5 @@
 .App {
-  text-align: center;
+text-align: center;
   font-family: Arial, sans-serif;
 }
 
@@ -7,4 +7,10 @@ button {
   margin: 10px;
   padding: 10px 20px;
   font-size: 16px;
+}
+.heading{
+  background-color: black;
+  color: white;
+   margin-top: -10px;
+   padding: 8px;
 }

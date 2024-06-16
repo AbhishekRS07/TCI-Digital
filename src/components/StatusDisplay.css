@@ -1,30 +1,73 @@
+.status-display {
+  margin-top: 20px;
+}
+
 .status-group {
-    /* margin-bottom: 20px; */
-  }
-  
-  .status-group h3 {
-    margin-bottom: 10px;
-  }
-  
-  .status-group ul {
-    list-style-type: none;
-    padding: 8px;
-    border-radius: 5px;
-    border: 1px solid rgb(181, 178, 178);
-    background-color: rgb(247, 247, 247);
-    display: flex;
-    flex-direction: row;
-    gap: 10px; 
-  }
-  
-  .status-group li {
-    display: flex;
-    gap: 5px; 
-  }
-  
-  .check-icon{
-    background-color: rgb(5, 84, 5);
-    color: rgb(68, 223, 68);
-    padding: 2px;
-    border-radius: 50%;
-  }
+  margin-bottom: 20px;
+  padding: 15px;
+  border-radius: 8px;
+  border: 1px solid #ccc;
+  background-color: #f9f9f9;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.status-group:hover {
+  transform: scale(1.02);
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
+}
+
+.status-group h3 {
+  margin-bottom: 10px;
+  font-size: 1.2em;
+  color: #333;
+}
+
+.status-group ul {
+  list-style-type: none;
+  padding: 8px;
+  border-radius: 5px;
+  border: 1px solid #b5b2b2;
+  background-color: #fff;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.status-group li {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 0.9em;
+  padding: 5px;
+  transition: background-color 0.3s ease;
+}
+
+.status-group li:hover {
+  background-color: #f1f1f1;
+}
+
+.check-icon {
+  color: #44df44;
+  transition: transform 0.3s ease;
+}
+
+.check-icon:hover {
+  transform: scale(1.1);
+}
+
+.times-icon {
+  color: #ff4d4d;
+  transition: transform 0.3s ease;
+}
+
+.times-icon:hover {
+  transform: scale(1.1);
+}
+
+.validation-error {
+  color: #ff4d4d;
+  margin-top: 10px;
+  font-size: 1.1em;
+  font-weight: bold;
+}

@@ -8,7 +8,10 @@ function App() {
   return (
     <Provider store={store}>
       <div className="App">
+        <div className='heading'>
         <h1>Todo Status Viewer</h1>
+        </div>
+       
         <GroupList />
       </div>
     </Provider>

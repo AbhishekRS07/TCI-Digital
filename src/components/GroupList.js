@@ -1,7 +1,4 @@
 import React, { useState } from "react";
-
-// import { useDispatch } from "react-redux";
-
 import Group from "./Group";
 import StatusDisplay from "./StatusDisplay";
 import { FaPlus, FaEye, FaEyeSlash } from "react-icons/fa";
@@ -11,7 +8,7 @@ function GroupList() {
   const initialGroup = { from: 1, to: 10 };
   const [groups, setGroups] = useState([initialGroup]);
   const [showStatus, setShowStatus] = useState(false);
-  // const dispatch = useDispatch();
+  const [error, setError] = useState('');
 
   const handleAddGroup = () => {
     const newGroup = { from: "", to: "" };
@@ -66,6 +63,7 @@ function GroupList() {
             </>
           )}
         </div>
+        {error && <p className="error-message">{error}</p>}
       </div>
       {showStatus && <StatusDisplay groups={groups} />}
     </div>

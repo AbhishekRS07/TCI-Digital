@@ -1,7 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import './StatusDisplay.css';
-import { FaCheck } from 'react-icons/fa';
+import { FaCheck, FaTimes } from 'react-icons/fa';
+
 function StatusDisplay({ groups }) {
   const [statuses, setStatuses] = useState([]);
 
@@ -28,16 +29,13 @@ function StatusDisplay({ groups }) {
     fetchStatuses();
   }, [groups]);
 
- 
   const validateGroups = () => {
     const sortedGroups = [...groups].sort((a, b) => a.from - b.from);
 
-  
     if (sortedGroups.length === 0 || sortedGroups[0].from !== 1 || sortedGroups[sortedGroups.length - 1].to !== 10) {
       return false;
     }
 
-  
     for (let i = 1; i < sortedGroups.length; i++) {
       if (sortedGroups[i].from !== sortedGroups[i - 1].to + 1) {
         return false;
@@ -53,7 +51,6 @@ function StatusDisplay({ groups }) {
     return true;
   };
 
-  
   return (
     <div className="status-display">
       {validateGroups() ? (
@@ -65,11 +62,12 @@ function StatusDisplay({ groups }) {
                 .filter(status => status.id >= group.from && status.id <= group.to)
                 .map(status => (
                   <li key={status.id}>
-                     {status.completed ? 'Yes' : 'No'}
+                      {status.completed ? 'Yes' : 'No'}
+                    {status.completed ? <FaCheck className="check-icon" /> : <FaTimes className="times-icon" />}
+                  
                   </li>
-                 
                 ))}
-             <FaCheck className="check-icon" /> </ul>
+            </ul>
           </div>
         ))
       ) : (
@@ -77,7 +75,6 @@ function StatusDisplay({ groups }) {
           Invalid groups configuration. Please adjust to meet the rules.
         </div>
       )}
-       
     </div>
   );
 }
