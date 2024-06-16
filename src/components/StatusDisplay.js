@@ -1,7 +1,7 @@
-import React, { useEffect, useState } from 'react';
-import axios from 'axios';
-import './StatusDisplay.css';
-import { FaCheck, FaTimes } from 'react-icons/fa';
+import React, { useEffect, useState } from "react";
+import axios from "axios";
+import "./StatusDisplay.css";
+import { FaCheck, FaTimes } from "react-icons/fa";
 
 function StatusDisplay({ groups }) {
   const [statuses, setStatuses] = useState([]);
@@ -10,16 +10,19 @@ function StatusDisplay({ groups }) {
     const fetchStatuses = async () => {
       try {
         const results = await Promise.all(
-          groups.flatMap(group =>
+          groups.flatMap((group) =>
             Array.from({ length: group.to - group.from + 1 }, (_, i) =>
-              axios.get(`https://jsonplaceholder.typicode.com/todos/${group.from + i}`)
-                .then(response => response.data)
-                .catch(error => null)
+              axios
+                .get(
+                  `https://jsonplaceholder.typicode.com/todos/${group.from + i}`
+                )
+                .then((response) => response.data)
+                .catch((error) => null)
             )
           )
         );
 
-        const validResults = results.filter(result => result !== null);
+        const validResults = results.filter((result) => result !== null);
         setStatuses(validResults);
       } catch (error) {
         console.error("Error fetching statuses:", error);
@@ -32,7 +35,11 @@ function StatusDisplay({ groups }) {
   const validateGroups = () => {
     const sortedGroups = [...groups].sort((a, b) => a.from - b.from);
 
-    if (sortedGroups.length === 0 || sortedGroups[0].from !== 1 || sortedGroups[sortedGroups.length - 1].to !== 10) {
+    if (
+      sortedGroups.length === 0 ||
+      sortedGroups[0].from !== 1 ||
+      sortedGroups[sortedGroups.length - 1].to !== 10
+    ) {
       return false;
     }
 
@@ -56,15 +63,22 @@ function StatusDisplay({ groups }) {
       {validateGroups() ? (
         groups.map((group, index) => (
           <div key={index} className="status-group">
-            <h3>Group {index + 1}: From {group.from} to {group.to}</h3>
+            <h3>
+              Group {index + 1}: From {group.from} to {group.to}
+            </h3>
             <ul>
               {statuses
-                .filter(status => status.id >= group.from && status.id <= group.to)
-                .map(status => (
+                .filter(
+                  (status) => status.id >= group.from && status.id <= group.to
+                )
+                .map((status) => (
                   <li key={status.id}>
-                      {status.completed ? 'Yes' : 'No'}
-                    {status.completed ? <FaCheck className="check-icon" /> : <FaTimes className="times-icon" />}
-                  
+                    {status.completed ? "Yes" : "No"}
+                    {status.completed ? (
+                      <FaCheck className="check-icon" />
+                    ) : (
+                      <FaTimes className="times-icon" />
+                    )}
                   </li>
                 ))}
             </ul>

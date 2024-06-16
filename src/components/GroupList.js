@@ -8,8 +8,8 @@ function GroupList() {
   const initialGroup = { from: 1, to: 10 };
   const [groups, setGroups] = useState([initialGroup]);
   const [showStatus, setShowStatus] = useState(false);
-  const [error, setError] = useState('');
 
+ 
   const handleAddGroup = () => {
     const newGroup = { from: "", to: "" };
     setGroups([...groups, newGroup]);
@@ -44,7 +44,11 @@ function GroupList() {
           />
         ))}
         <div className="icon-container">
-          <FaPlus onClick={handleAddGroup} className="icon" title="Add Group" />
+          <FaPlus
+            onClick={handleAddGroup}
+            className="icon"
+            title="Add Group"
+          />
           {groups.length > 0 && (
             <>
               {showStatus ? (
@@ -63,7 +67,6 @@ function GroupList() {
             </>
           )}
         </div>
-        {error && <p className="error-message">{error}</p>}
       </div>
       {showStatus && <StatusDisplay groups={groups} />}
     </div>
